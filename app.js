@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require("express-session");
 var passport = require('passport');
+const fileUpload = require('express-fileupload');
 
 var app = express();
 
@@ -23,6 +24,11 @@ app.use(session(
 ));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());

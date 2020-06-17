@@ -9,16 +9,20 @@ module.exports = (passport) => {
 
     // frontend
     const indexRouter = require('./index.routes')(auth);
+    const readingsRouter = require('./frontend/readings.routes')(auth);
+    const kitsRouter = require('./frontend/kits.routes')(auth);
 
     //admin
-    const usersRouter = require('./admin/users.routes')(auth);
-    const kitsRouter = require('./admin/kits.routes')(auth);
+    const usersAdminRouter = require('./admin/users.routes')(auth);
+    const kitsAdminRouter = require('./admin/kits.routes')(auth);
 
     router.use('/', authRouter);
     router.use('/', indexRouter);
-
-    router.use('/users', usersRouter);
+    router.use('/readings', readingsRouter);
     router.use('/kits', kitsRouter);
+
+    router.use('/admin/users', usersAdminRouter);
+    router.use('/admin/kits', kitsAdminRouter);
 
     return router;
 }
