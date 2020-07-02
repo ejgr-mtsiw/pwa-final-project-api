@@ -1,0 +1,14 @@
+@media (min-width: 767px) {
+  #main {
+    width: calc(100% - 300px);
+    float: right;
+  }
+}
+
+@media (min-width: 1440px) {
+  #main {
+    width: calc(100% - 300px);
+    float: none;
+    margin-left: 300px;
+  }
+}
