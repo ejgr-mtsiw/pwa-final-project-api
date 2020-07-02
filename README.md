@@ -9,4 +9,4 @@ projeto final de Programação Web Avançada
 4. Copiar/Renomear o ficheiro `config.json.default` para `config.json`
 5. Configurar dados de acesso à base de dados no ficheiro `config/config.json`
 6. Correr as migrações para criar as tabelas `npx sequelize-cli db:migrate`
-7. Correr o servidor: `node bin/www`
+7. Correr o servidor: `npm start`

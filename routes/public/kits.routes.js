@@ -17,9 +17,5 @@ module.exports = (auth) => {
         auth.optional,
         kitsController.getKitPhotoById);
 
-    router.post('/create',
-        auth.optional,
-        kitsController.createNewKit);
-
     return router;
 };

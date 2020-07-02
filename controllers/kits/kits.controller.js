@@ -121,3 +121,86 @@ exports.createNewKit = [
         });
     }
 ];
+
+/**
+ * Updates a Kit
+ */
+exports.updateKit = [
+
+    validator.id,
+    validator.name,
+    validator.location,
+    validator.oldPhoto,
+
+    (req, res) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(messages.db.requiredData.status)
+                .send(messages.db.requiredData);
+        }
+
+        let photo = req.body.oldPhoto;
+
+        if (req.files != null && req.files.photo != null) {
+            // We're replacing the photo
+            let photoFile = req.files.photo;
+            // Use the mv() method to place the file in upload
+            // directory(i.e. "uploads")
+            photo = photoFile.md5;
+            photoFile.mv(uploadPath + photo);
+        }
+
+        models.Kit.update({
+            name: req.body.name,
+            location: req.body.location,
+            photo: photo
+        }, {
+            where: {
+                id: req.body.id
+            }
+        }).then((kit) => {
+            return res.status(messages.db.successUpdate.status)
+                .send(messages.db.successUpdate);
+        }).catch((err) => {
+            console.log(err);
+            return res.status(messages.db.dbError.status)
+                .send(messages.db.dbError);
+        });
+    }
+];
+
+/**
+ * Deletes a Kit
+ */
+exports.deleteKit = [
+
+    validator.id,
+
+    (req, res) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(messages.db.requiredData.status)
+                .send(messages.db.requiredData);
+        }
+
+        models.Kit.destroy({
+            where: {
+                id: req.body.id
+            }
+        }).then((rowDeleted) => { // rowDeleted will return number of rows deleted
+            if (rowDeleted === 1) {
+                return res.status(messages.db.successDelete.status)
+                    .send(messages.db.successDelete);
+            } else {
+                return res.status(messages.db.dbError.status)
+                    .send(messages.db.dbError);
+            }
+        }).catch((err) => {
+            return res.status(messages.db.dbError.status)
+                .send(messages.db.dbError);
+        });
+    }
+];
+

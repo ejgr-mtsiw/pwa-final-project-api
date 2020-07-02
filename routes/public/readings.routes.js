@@ -10,5 +10,9 @@ module.exports = (auth) => {
         auth.optional,
         readingsController.getAllReadingsForKit);
 
+    router.post('/:KitId',
+        auth.required,
+        readingsController.addReading);
+
     return router;
 };

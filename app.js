@@ -35,7 +35,8 @@ app.use(passport.session());
 require('./config/passport/passport')(passport);
 
 // routes
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'pwa-frontend/dist/pwa-frontend')));
 app.use('/', require('./routes')(passport));
 
 // catch 404 and forward to error handler

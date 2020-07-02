@@ -8,9 +8,9 @@ module.exports = (passport) => {
     const authRouter = require('./auth.routes')(auth);
 
     // frontend
-    const indexRouter = require('./index.routes')(auth);
-    const readingsRouter = require('./frontend/readings.routes')(auth);
-    const kitsRouter = require('./frontend/kits.routes')(auth);
+    const indexRouter = require('./public/index.routes')(auth);
+    const readingsRouter = require('./public/readings.routes')(auth);
+    const kitsRouter = require('./public/kits.routes')(auth);
 
     //admin
     const usersAdminRouter = require('./admin/users.routes')(auth);
