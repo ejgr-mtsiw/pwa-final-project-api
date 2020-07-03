@@ -1,4 +1,4 @@
-# pwa-final-project
+# pwa-final-project-api
 Projeto Final de Programação Web Avançada
 
 Este projeto permite gerir um conjunto de kits de recolha de dados, que serão
@@ -25,9 +25,7 @@ aplicações móveis.
 Este projeto é constituído por um web service desenvolvido em
 [Node.js](https://nodejs.org/) recorrendo à framework
  [Express](https://expressjs.com/), que possibilita a permite a interação com
- os kits e as aplicações móveis, e por um frontend desenvolvido em
- [Angular](https://angular.io/), que funciona como alternativa às aplicações
- móveis e como sistema de administração da plataforma.
+ os kits e as aplicações móveis.
 
 ## Tecnologias utilizadas
 1. [Node.js](https://nodejs.org/)
@@ -35,12 +33,6 @@ Este projeto é constituído por um web service desenvolvido em
 1. [Pug](https://pugjs.org/)
 1. [Passport](http://www.passportjs.org/)
 1. [Sequelize](https://sequelize.org/)
-1. [Angular](https://angular.io/)
-1. [Bootstrap](https://getbootstrap.com/)
-1. [FontAwesome](https://fontawesome.com/)
-1. [Chartjs](https://www.chartjs.org/)
-1. [TypeScript](https://www.typescriptlang.org/)
-1. [Sass](https://sass-lang.com/)
 
 ## Instalação
 
@@ -50,5 +42,4 @@ Este projeto é constituído por um web service desenvolvido em
 1. Copiar/Renomear o ficheiro `config.json.default` para `config.json`
 1. Configurar dados de acesso à base de dados no ficheiro `config/config.json`
 1. Correr as migrações para criar as tabelas `npx sequelize-cli db:migrate`
-1. Construir o frontend: `cd pwa-frontend && npx ng build`
 1. Correr o servidor: `npm start`
