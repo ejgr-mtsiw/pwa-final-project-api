@@ -6,21 +6,12 @@ module.exports = (passport) => {
     const auth = require('./auth')(passport);
 
     const authRouter = require('./auth.routes')(auth);
+    const kitsRouter = require('./kits.routes')(auth);
+    const usersRouter = require('./users.routes')(auth);
 
-    // frontend
-    const indexRouter = require('./public/index.routes')(auth);
-    const kitsRouter = require('./public/kits.routes')(auth);
-
-    //admin
-    const usersAdminRouter = require('./admin/users.routes')(auth);
-    const kitsAdminRouter = require('./admin/kits.routes')(auth);
-
-    router.use('/', authRouter);
-    router.use('/', indexRouter);
+    router.use('/auth', authRouter);
     router.use('/kits', kitsRouter);
-
-    router.use('/admin/users', usersAdminRouter);
-    router.use('/admin/kits', kitsAdminRouter);
+    router.use('/users', usersRouter);
 
     return router;
 }

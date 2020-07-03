@@ -3,9 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www",
-        "install:frontend": "cd pwa-frontend && npm install",
-        "postinstall": "npx npm-run-all -p install:*"
+        "start": "node ./bin/www"
     },
     "dependencies": {
         "bcryptjs": "^2.4",
@@ -28,7 +26,6 @@
         "sequelize-cli": "^5.5.1"
     },
     "devDependencies": {
-        "@angular/cli": "^10.0.1",
         "nodemon": "^2.0.4"
     }
 }
