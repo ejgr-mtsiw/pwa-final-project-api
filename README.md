@@ -9,37 +9,38 @@ horários e os consumos de água da manutenção dos espaços verdes.
 
 Este kits iriam ser construídos pelos alunos do 3º ano do Curso Profissional de
 Técnico de Eletrónica, Automação e Compuitadores, mas devido à interrupção das
-atividaes letivas pela pandemia do COVID-19, não foi possível concluir o
-desenvolvimento dos kits, pelo que apenas está disponível um conjunto limitado
-de dados. Nenhum dos kits em funcionamento faz a recolha da humidade do solo,
+atividades letivas pela pandemia do COVID-19, não foi possível concluir o seu
+desenvolvimento, pelo que apenas está disponível um conjunto limitado de dados.
+Nenhum dos kits em funcionamento faz a recolha da humidade do solo,
 mas é possível recolher os valores da temperatura e humidade relativa do ar.
 
-Em complemento a este projeto foram desenvolvidas aplicações móveis na
-plataforma App Inventor pelos alunos do 2º ano do Curso, possibilitando o
+Em complemento a este projeto foram desenvolvidas aplicações móveis, na
+plataforma App Inventor, pelos alunos do 2º ano do Curso, possibilitando o
 acompanhamento do estado dos jardins.
 
 O projeto aqui apresentado serve de plataforma para recolha, tratamento e 
 administração dos dados fornecidos pelos kits e a sua disponibilização às
 aplicações móveis.
 
-Este projeto é constituído por um web service desenvolvido em [Node.js]
-(https://nodejs.org/) recorrendo à framework [Express] (https://expressjs.com/),
-que possibilita a permite a interação com os kits e as aplicações móveis, e por
-um frontend desenvolvido em [Angular] (https://angular.io/), que funciona como
-alternativa às aplicações móveis e como sistema de administração da plataforma.
+Este projeto é constituído por um web service desenvolvido em
+[Node.js](https://nodejs.org/) recorrendo à framework
+ [Express](https://expressjs.com/), que possibilita a permite a interação com
+ os kits e as aplicações móveis, e por um frontend desenvolvido em
+ [Angular](https://angular.io/), que funciona como alternativa às aplicações
+ móveis e como sistema de administração da plataforma.
 
 ## Tecnologias utilizadas
-1. [Node.js] (https://nodejs.org/)
-1. [Express] (https://expressjs.com/)
-1. [Pug] (https://pugjs.org/)
-1. [Passport] (http://www.passportjs.org/)
-1. [Sequelize] (https://sequelize.org/)
-1. [Angular] (https://angular.io/)
-1. [Bootstrap] (https://getbootstrap.com/)
-1. [FontAwesome] (https://fontawesome.com/)
-1. [Chartjs] (https://www.chartjs.org/)
-1. [TypeScript] (https://www.typescriptlang.org/)
-1. [Sass] (https://sass-lang.com/)
+1. [Node.js](https://nodejs.org/)
+1. [Express](https://expressjs.com/)
+1. [Pug](https://pugjs.org/)
+1. [Passport](http://www.passportjs.org/)
+1. [Sequelize](https://sequelize.org/)
+1. [Angular](https://angular.io/)
+1. [Bootstrap](https://getbootstrap.com/)
+1. [FontAwesome](https://fontawesome.com/)
+1. [Chartjs](https://www.chartjs.org/)
+1. [TypeScript](https://www.typescriptlang.org/)
+1. [Sass](https://sass-lang.com/)
 
 ## Instalação
 
