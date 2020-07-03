@@ -1,0 +1,58 @@
+doctype html
+html
+    head
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js')
+    body
+        canvas(id='myChart' width='300' height='100')
+
+        script(type='text/javascript').
+            Chart.defaults.global.responsive = true;
+            Chart.defaults.global.elements.point.radius = 0;
+            Chart.defaults.global.elements.point.hitRadius = 0;
+            Chart.defaults.global.elements.point.hoverRadius = 0;
+            Chart.defaults.global.tooltips.enabled = false;
+            Chart.defaults.line.spanGaps = false;
+
+            var ctx = document.getElementById('myChart');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Temperatura (ºC)',
+                            fill: false,
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: !{JSON.stringify(temperatureData)}
+                        }, {
+                            label: 'Humidade (%)',
+                            fill: false,
+                            backgroundColor: 'rgb(54, 162, 235)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            data:  !{JSON.stringify(humidityData)}
+                        },
+                    ]
+                },
+                'options': {
+                    scales: {
+                        xAxes: [
+                            {
+                                type: 'time',
+                                display: true,
+                                time: {
+                                    parser: "YYYY-MM-DD HH:mm:ss",
+                                    unit: 'day',
+                                    displayFormats: {
+                                        'minute': 'HH:mm',
+                                        'hour': 'HH:mm',
+                                        'day': 'DD-MM'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    legend: {
+                        onClick: null
+                    }
+                }
+            });

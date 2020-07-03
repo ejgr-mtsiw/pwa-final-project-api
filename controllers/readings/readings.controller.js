@@ -3,8 +3,6 @@ const messages = require('../../config/messages/bd');
 
 const { validationResult } = require('express-validator');
 const validator = require('./readings.validator');
-const { date } = require('./readings.validator');
-
 
 var exports = module.exports = {};
 
@@ -30,7 +28,60 @@ exports.getAllReadingsForKit = [
                 }
             }
         ).then((readings) => {
-            res.send(readings);
+            return res.send(readings);
+        });
+    }
+];
+
+/**
+ * Renders a chart of the last 10 readings
+ */
+exports.renderChartLast10Readings = [
+
+    validator.KitIdParam,
+
+    (req, res) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(messages.db.requiredData.status)
+                .send(messages.db.requiredData);
+        }
+
+        models.Reading.findAll(
+            {
+                'where': {
+                    KitId: req.params.KitId
+                },
+                'order': [
+                    ['date', 'DESC']
+                ],
+                'limit': 10
+            }
+        ).then((readings) => {
+            let temperatureData = [];
+            let humidityData = [];
+
+            readings.forEach(reading => {
+                temperatureData.push(
+                    {
+                        t: reading.date,
+                        y: reading.temperature
+                    }
+                );
+
+                humidityData.push(
+                    {
+                        t: reading.date,
+                        y: reading.humidity
+                    }
+                );
+            });
+
+            return res.render('kits/chart', {
+                temperatureData: temperatureData,
+                humidityData: humidityData
+            });
         });
     }
 ];
