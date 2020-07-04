@@ -5,6 +5,7 @@ const uploadPath = require('../../config/config.json')[env]['uploads'] + '/kits/
 const models = require('../../models');
 const { validationResult } = require('express-validator');
 const validator = require('./kits.validator');
+const { log } = require('debug');
 
 var exports = module.exports = {};
 
@@ -97,8 +98,8 @@ exports.createNewKit = [
                 .send(messages.db.requiredData);
         }
 
-        if (!req.files.photo) {
-            return res.status(404)
+        if (!req.files || !req.files.photo) {
+            return res.status(messages.db.dbError.status)
                 .send({ msg: "Missing photo!" });
         }
 
@@ -130,7 +131,7 @@ exports.updateKit = [
     validator.id,
     validator.name,
     validator.location,
-    validator.oldPhoto,
+    validator.photo,
 
     (req, res) => {
 
@@ -140,11 +141,11 @@ exports.updateKit = [
                 .send(messages.db.requiredData);
         }
 
-        let photo = req.body.oldPhoto;
+        let photo = req.body.photo;
 
-        if (req.files != null && req.files.photo != null) {
+        if (req.files != null && req.files.newPhoto != null) {
             // We're replacing the photo
-            let photoFile = req.files.photo;
+            let photoFile = req.files.newPhoto;
             // Use the mv() method to place the file in upload
             // directory(i.e. "uploads")
             photo = photoFile.md5;
