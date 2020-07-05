@@ -36,7 +36,7 @@ module.exports = (auth) => {
         auth.required,
         kitsController.updateKit);
 
-    router.post('/:id/delete',
+    router.delete('/:id/delete',
         auth.required,
         kitsController.deleteKit);
 

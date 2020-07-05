@@ -89,6 +89,7 @@ exports.createNewKit = [
 
     validator.name,
     validator.location,
+    validator.photo,
 
     (req, res) => {
 
@@ -98,23 +99,16 @@ exports.createNewKit = [
                 .send(messages.db.requiredData);
         }
 
-        if (!req.files || !req.files.photo) {
-            return res.status(messages.db.dbError.status)
-                .send({ msg: "Missing photo!" });
-        }
-
-        let photoFile = req.files.photo;
-        //Use the mv() method to place the file in upload directory (i.e. "uploads")
-        let photo = photoFile.md5;
-        photoFile.mv(uploadPath + photo);
-
         models.Kit.create({
             name: req.body.name,
             location: req.body.location,
-            photo: photo
+            photo: req.body.photo
         }).then((kit) => {
+            msg = messages.db.successInsert;
+            msg.kit = kit;
+
             return res.status(messages.db.successInsert.status)
-                .send(messages.db.successInsert);
+                .send(msg);
         }).catch((err) => {
             console.log(err);
             return res.status(messages.db.dbError.status)
@@ -141,21 +135,10 @@ exports.updateKit = [
                 .send(messages.db.requiredData);
         }
 
-        let photo = req.body.photo;
-
-        if (req.files != null && req.files.newPhoto != null) {
-            // We're replacing the photo
-            let photoFile = req.files.newPhoto;
-            // Use the mv() method to place the file in upload
-            // directory(i.e. "uploads")
-            photo = photoFile.md5;
-            photoFile.mv(uploadPath + photo);
-        }
-
         models.Kit.update({
             name: req.body.name,
             location: req.body.location,
-            photo: photo
+            photo: req.body.photo
         }, {
             where: {
                 id: req.body.id
@@ -176,7 +159,7 @@ exports.updateKit = [
  */
 exports.deleteKit = [
 
-    validator.id,
+    validator.idParam,
 
     (req, res) => {
 
@@ -188,7 +171,7 @@ exports.deleteKit = [
 
         models.Kit.destroy({
             where: {
-                id: req.body.id
+                id: req.params.id
             }
         }).then((rowDeleted) => { // rowDeleted will return number of rows deleted
             if (rowDeleted === 1) {
