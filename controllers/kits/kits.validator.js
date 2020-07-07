@@ -1,5 +1,5 @@
 
-const { body, param, files } = require('express-validator');
+const { body, param } = require('express-validator');
 
 module.exports = {
     idParam: param('id').notEmpty().isNumeric(),
