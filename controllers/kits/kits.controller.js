@@ -159,7 +159,7 @@ exports.updateKit = [
  */
 exports.deleteKit = [
 
-    validator.id,
+    validator.idParam,
 
     (req, res) => {
 
@@ -171,7 +171,7 @@ exports.deleteKit = [
 
         models.Kit.destroy({
             where: {
-                id: req.body.id
+                id: req.params.id
             }
         }).then((rowDeleted) => { // rowDeleted will return number of rows deleted
             if (rowDeleted === 1) {
