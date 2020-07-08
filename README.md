@@ -46,3 +46,43 @@ Este projeto é constituído por um web service desenvolvido em
 1. Configurar dados de acesso à base de dados no ficheiro `config/config.json`
 1. Correr as migrações para criar as tabelas `npx sequelize-cli db:migrate`
 1. Correr o servidor: `npm start`
+
+## Servidor de testes
+A aplicação disponibiliza os seguintes endpoints públicos:
+
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/ : Lista com os dados dos kits
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT} : dados do kit com
+o id `{ID_DO_KIT}`
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/photo : fotografia
+do kit
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/readings : leituras
+registadas pelo kit indicado
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/readings/chart : 
+gráfico das leituras registadas
+* [GET] https://mtsiw.duckdns.org/pwa/api/signin : permite autenticar no sistema
+* [GET] https://mtsiw.duckdns.org/pwa/api/signout : termina a sessão no sistema
+
+Os seguintes endpoints necessitam de autenticação prévia:
+* [POST] https://mtsiw.duckdns.org/pwa/api/kits/create : Criar um novo kit
+* [PUT] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/update : Atualiza os
+dados do kit indicado
+* [DELETE] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/delete : Elimina
+o kit indicado
+* [POST] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/readings/create :
+Regista uma nova leitura para o kit indicado, é utilizado pelos kits no terreno
+para comunicarem os dados recolhidos.
+* [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/events : Lista de
+ocorrências para este kit
+* [POST] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/events/create : Cria
+um novo registo de ocorrência para o kit indicado
+* [GET] https://mtsiw.duckdns.org/pwa/api/users : Lista com os dados dos
+utilizadores do sistema
+* [POST] https://mtsiw.duckdns.org/pwa/api/users/create : Cria um novo
+utilizador
+* [PUT] https://mtsiw.duckdns.org/pwa/api/users/{ID_DO_UTILIZADOR}/update :
+Atualiza os dados de um utilizador
+* [DELETE] https://mtsiw.duckdns.org/pwa/api/users/{ID_DO_UTILIZADOR}/delete : 
+remove o utilizador da base de dados
+* [PUT] https://mtsiw.duckdns.org/pwa/api/profile/update : permite ao
+utilizador alterar os seus dados pessoais. Neste caso apenas a sua password
+os restantes dados são geridos apenas pelo(s) administrador(es) do sistema
