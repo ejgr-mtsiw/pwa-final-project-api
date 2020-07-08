@@ -14,7 +14,9 @@ var exports = module.exports = {};
 exports.getAllUsers = (req, res) => {
 
     models.User.findAll({
-        attributes: ['id', 'email', 'name', 'role', 'lastLogin']
+        attributes: {
+            exclude: ['password']
+        }
     }).then((users) => {
         if (!users) {
             return res.status(messages.db.noRecords.status)
@@ -38,7 +40,9 @@ exports.getUserById = [
         }
 
         models.User.findByPk(req.params.id, {
-            attributes: ['id', 'email', 'name', 'role', 'lastLogin']
+            attributes: {
+                exclude: ['password']
+            }
         }).then((user) => {
             if (!user) {
                 return res.status(messages.db.noRecords.status)

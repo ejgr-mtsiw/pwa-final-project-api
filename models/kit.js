@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
         photo: { type: DataTypes.STRING, allowNull: false }
     }, {});
     Kit.associate = function (models) {
-        Kit.belongsToMany(models.User, { through: models.KitUser });
         Kit.hasMany(models.Reading);
         Kit.hasMany(models.Event);
     };

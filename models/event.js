@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     Event.associate = function (models) {
         Event.belongsTo(models.Kit);
+        Event.belongsTo(models.User);
     };
     return Event;
 };

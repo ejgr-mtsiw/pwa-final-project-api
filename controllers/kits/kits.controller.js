@@ -5,7 +5,6 @@ const uploadPath = require('../../config/config.json')[env]['uploads'] + '/kits/
 const models = require('../../models');
 const { validationResult } = require('express-validator');
 const validator = require('./kits.validator');
-const { log } = require('debug');
 
 var exports = module.exports = {};
 

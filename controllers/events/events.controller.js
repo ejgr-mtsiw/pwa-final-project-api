@@ -23,9 +23,18 @@ exports.getAllEventsForKit = [
 
         models.Event.findAll(
             {
-                'where': {
+                where: {
                     KitId: req.params.KitId
-                }
+                },
+                include: [
+                    {
+                        model: models.User,
+                        as: 'User',
+                        attributes: {
+                            exclude: ['password']
+                        }
+                    }
+                ]
             }
         ).then((events) => {
             return res.send(events);
@@ -39,6 +48,7 @@ exports.getAllEventsForKit = [
 exports.addEvent = [
 
     validator.KitId,
+    validator.UserId,
     validator.description,
     validator.details,
     validator.date,
@@ -53,6 +63,7 @@ exports.addEvent = [
 
         models.Event.create({
             KitId: req.body.KitId,
+            UserId: req.body.UserId,
             date: req.body.date,
             description: req.body.description,
             details: req.body.details

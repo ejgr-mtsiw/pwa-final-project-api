@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         lastLogin: DataTypes.DATE
     }, {});
     User.associate = function (models) {
-        User.belongsToMany(models.Kit, { through: models.KitUser });
+        User.hasMany(models.Event);
     };
     return User;
 };
