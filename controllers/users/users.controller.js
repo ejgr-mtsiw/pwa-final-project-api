@@ -16,12 +16,17 @@ exports.getAllUsers = (req, res) => {
     models.User.findAll({
         attributes: ['id', 'email', 'name', 'role', 'lastLogin']
     }).then((users) => {
-        res.send(users);
+        if (!users) {
+            return res.status(messages.db.noRecords.status)
+                .send(messages.db.noRecords);
+        }
+
+        return res.send(users);
     });
 };
 
 exports.getUserById = [
-    validator.id,
+    validator.idParam,
 
     (req, res) => {
         const errors = validationResult(req);
@@ -32,9 +37,14 @@ exports.getUserById = [
                 .send(msg);
         }
 
-        models.User.findByPk(req.body.id, {
+        models.User.findByPk(req.params.id, {
             attributes: ['id', 'email', 'name', 'role', 'lastLogin']
         }).then((user) => {
+            if (!user) {
+                return res.status(messages.db.noRecords.status)
+                    .send(messages.db.noRecords);
+            }
+
             return res.send(user);
         });
     }
@@ -48,10 +58,48 @@ exports.getUserProfile = [
             name: req.user.name,
             lastLogin: req.user.lastLogin
         });
-
     }
 ];
 
+exports.createNewUser = [
+
+    validator.email,
+    validator.password,
+    validator.name,
+    validator.role,
+
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            let msg = messages.db.requiredData;
+            msg.errors = errors;
+            return res.status(msg.status)
+                .send(msg);
+        }
+
+        models.User.create(
+            {
+                email: req.body.email,
+                name: req.body.name,
+                role: req.body.role,
+                password: generateHash(req.body.password)
+            }
+        ).then((user) => {
+            msg = messages.db.successInsert;
+            msg.user = user;
+
+            // Don't send password back!
+            msg.user.password = '';
+
+            return res.status(messages.db.successInsert.status)
+                .send(msg);
+        }).catch((err) => {
+            console.log(err);
+            return res.status(messages.db.dbError.status)
+                .send(messages.db.dbError);
+        });
+    }
+];
 
 exports.updateUser = [
 
@@ -77,7 +125,7 @@ exports.updateUser = [
         };
 
         if (req.body.password) {
-            data.password = req.body.password;
+            data.password = generateHash(req.body.password);
         }
 
         models.User.update(data, {
@@ -122,6 +170,37 @@ exports.updatePassword = [
                 .send(messages.db.successUpdate);
         }).catch((err) => {
             console.log(err);
+            return res.status(messages.db.dbError.status)
+                .send(messages.db.dbError);
+        });
+    }
+];
+
+exports.deleteUser = [
+
+    validator.idParam,
+
+    (req, res) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(messages.db.requiredData.status)
+                .send(messages.db.requiredData);
+        }
+
+        models.User.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then((rowDeleted) => { // rowDeleted will return number of rows deleted
+            if (rowDeleted === 1) {
+                return res.status(messages.db.successDelete.status)
+                    .send(messages.db.successDelete);
+            } else {
+                return res.status(messages.db.dbError.status)
+                    .send(messages.db.dbError);
+            }
+        }).catch((err) => {
             return res.status(messages.db.dbError.status)
                 .send(messages.db.dbError);
         });
