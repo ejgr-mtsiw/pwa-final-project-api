@@ -19,7 +19,10 @@ app.use(session(
     {
         secret: '222 keyboard cats',
         resave: true,
-        saveUninitialized: true
+        saveUninitialized: true,
+        cookie: {
+            sameSite: 'strict'
+        }
     }
 ));
 app.use(express.urlencoded({ extended: false }));

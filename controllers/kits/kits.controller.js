@@ -10,7 +10,7 @@ const { log } = require('debug');
 var exports = module.exports = {};
 
 /**
- * Get all kits (admin)
+ * Get all kits
  */
 exports.getAllKits = (req, res) => {
 

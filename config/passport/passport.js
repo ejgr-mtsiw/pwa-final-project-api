@@ -4,6 +4,15 @@ var bCrypt = require('bcryptjs');
 const jsonMessages = require('../messages/login');
 const User = require('../../models').User;
 
+var isValidPassword = (password, hash) => {
+    return bCrypt.compareSync(password, hash);
+}
+
+var generateHash = (password) => {
+    return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+};
+
+
 module.exports = (passport) => {
 
     passport.serializeUser((user, done) => {
@@ -27,16 +36,7 @@ module.exports = (passport) => {
         passwordField: 'password',
         passReqToCallback: true
     },
-        (req, email, password, done) => {
-            // request object is now first argument
-            const isValidPassword = (password, hash) => {
-                return bCrypt.compareSync(password, hash);
-            }
-
-            // const generateHash = (password)=> {
-            //     return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-            // };
-
+        (req, email, password, done) => { // request object is now first argument            
             User.findOne({
                 where:
                 {
@@ -60,3 +60,7 @@ module.exports = (passport) => {
         }
     ));
 };
+
+module.exports.isValidPassword = isValidPassword;
+
+module.exports.generateHash = generateHash;

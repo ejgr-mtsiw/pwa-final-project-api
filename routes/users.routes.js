@@ -9,5 +9,17 @@ module.exports = (auth) => {
         auth.required,
         userController.getAllUsers);
 
+    router.get('/profile',
+        auth.required,
+        userController.getUserProfile);
+
+    // router.put('/:id/update',
+    //     auth.required,
+    //     userController.updateUser);
+
+    router.put('/profile/update',
+        auth.required,
+        userController.updatePassword);
+
     return router;
 };
