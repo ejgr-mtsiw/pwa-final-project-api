@@ -59,7 +59,7 @@ do kit
 registadas pelo kit indicado
 * [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/readings/chart : 
 gráfico das leituras registadas
-* [GET] https://mtsiw.duckdns.org/pwa/api/auth/signin : permite autenticar no
+* [POST] https://mtsiw.duckdns.org/pwa/api/auth/signin : permite autenticar no
 sistema
 * [GET] https://mtsiw.duckdns.org/pwa/api/auth/signout : termina a sessão no
 sistema
