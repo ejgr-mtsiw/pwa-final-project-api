@@ -59,8 +59,10 @@ do kit
 registadas pelo kit indicado
 * [GET] https://mtsiw.duckdns.org/pwa/api/kits/{ID_DO_KIT}/readings/chart : 
 gráfico das leituras registadas
-* [GET] https://mtsiw.duckdns.org/pwa/api/signin : permite autenticar no sistema
-* [GET] https://mtsiw.duckdns.org/pwa/api/signout : termina a sessão no sistema
+* [GET] https://mtsiw.duckdns.org/pwa/api/auth/signin : permite autenticar no
+sistema
+* [GET] https://mtsiw.duckdns.org/pwa/api/auth/signout : termina a sessão no
+sistema
 
 Os seguintes endpoints necessitam de autenticação prévia:
 * [POST] https://mtsiw.duckdns.org/pwa/api/kits/create : Criar um novo kit
