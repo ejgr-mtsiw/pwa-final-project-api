@@ -34,7 +34,7 @@ exports.getAllReadingsForKit = [
 ];
 
 /**
- * Renders a chart of the last 10 readings
+ * Renders a chart of the last 20 readings
  */
 exports.renderChartLast10Readings = [
 
@@ -56,7 +56,7 @@ exports.renderChartLast10Readings = [
                 'order': [
                     ['date', 'DESC']
                 ],
-                'limit': 10
+                'limit': 20
             }
         ).then((readings) => {
             let temperatureData = [];
@@ -92,7 +92,6 @@ exports.renderChartLast10Readings = [
 exports.addReading = [
 
     validator.KitId,
-    validator.date,
     validator.humidity,
     validator.temperature,
     validator.soilHumidity,
@@ -107,7 +106,6 @@ exports.addReading = [
 
         models.Reading.create({
             KitId: req.body.KitId,
-            date: req.body.date,
             humidity: req.body.humidity,
             temperature: req.body.temperature,
             soilHumidity: req.body.soilHumidity
