@@ -13,7 +13,7 @@
         "cors": "^2.8",
         "debug": "^2.6",
         "express": "^4.17",
-        "express-fileupload": "^1.1.7-alpha.3",
+        "express-fileupload": "^1.1.9",
         "express-session": "^1.17",
         "express-validator": "^6.5",
         "http-errors": "^1.7",
